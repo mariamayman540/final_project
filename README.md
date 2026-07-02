@@ -1,143 +1,174 @@
-# 🩺 AI Radiology Assistant
+# 🩺 MediScan AI – Multi-Modal Medical Imaging Diagnostic Assistant
 
-An end-to-end **Deep Learning** medical image diagnosis platform that assists healthcare professionals in analyzing multiple medical imaging modalities using state-of-the-art computer vision models and an AI-powered medical assistant.
+MediScan AI is an end-to-end **Deep Learning** application that assists healthcare professionals in screening three of the most common and clinically significant medical imaging tasks from a single web interface:
 
-The application supports:
+- 🧠 Brain Tumor Classification (MRI)
+- 🫁 Pneumonia Detection (Chest X-Ray)
+- 🫀 COVID-19 Detection (Chest CT)
+- 🤖 AI-powered Medical Assistant using **Llama 3.3 (70B)** via the Groq API
 
-- 🧠 Brain MRI Tumor Classification
-- 🫁 Chest X-ray Pneumonia Detection
-- 🫀 Chest CT COVID-19 Detection
-- 🤖 Context-aware Medical AI Chat Assistant powered by Llama 3.3 (70B)
+The system combines multiple computer vision models with a context-aware Large Language Model (LLM) to provide diagnostic predictions, confidence scores, severity assessment, and AI-generated medical explanations.
 
 ---
 
-## 🚀 Live Demo
+# 🚀 Live Demo
 
-**Hugging Face Space:**
+**Hugging Face Space**
+
 https://huggingface.co/spaces/PhilopateerSharl/radiology_assistant
 
 ---
 
-## 📌 Features
+# 📌 Overview
 
-- Multi-modal medical image analysis.
-- Brain MRI tumor classification using EfficientNetB0.
-- Chest X-ray pneumonia detection using EfficientNetB3.
-- Chest CT COVID-19 detection using EfficientNetB4.
-- Interactive Gradio web interface.
-- AI medical assistant powered by Groq API (Llama 3.3 70B).
-- Dynamic diagnostic cards with confidence scores.
-- SVG-based probability visualization.
-- Session history tracking.
-- Responsive Light/Dark UI.
+MediScan AI integrates three independently trained convolutional neural networks into a unified production-ready web application built with **Gradio** and deployed on **Hugging Face Spaces**.
 
----
+Each model is based on an **EfficientNet** backbone pretrained on ImageNet and trained using a two-stage transfer learning strategy:
 
-# 🏗️ System Architecture
+- Initial training with a frozen backbone
+- Low learning-rate fine-tuning of selected layers
 
-The project consists of three main components:
+Users can upload or capture a medical image, enter basic patient information, and instantly receive:
 
-### 1. Frontend
+- AI diagnosis
+- Confidence score
+- Color-coded severity level
+- Recommended next steps
+- AI-generated medical explanation
 
-- Gradio
-- HTML5
-- CSS3
-- SVG Visualization
-
-### 2. AI Inference Engine
-
-- TensorFlow
-- Keras
-- Transfer Learning
-- EfficientNet Models
-
-### 3. AI Medical Assistant
-
-- Groq API
-- Llama 3.3 (70B)
+A built-in conversational assistant powered by **Groq's Llama 3.3 (70B)** automatically understands the latest diagnosis and answers follow-up medical questions within the supported imaging domains.
 
 ---
 
-# 🧠 Deep Learning Models
+# ✨ Key Features
 
-| Scan Type   | Model          | Input Size | Task                   |
-| ----------- | -------------- | ---------- | ---------------------- |
-| Brain MRI   | EfficientNetB0 | 224×224    | 4-Class Classification |
-| Chest X-Ray | EfficientNetB3 | 384×384    | Pneumonia vs Normal    |
-| Chest CT    | EfficientNetB4 | 380×380    | COVID-19 vs Normal     |
+- Multi-modal medical image analysis
+- Three independently trained deep learning models
+- EfficientNetB0, EfficientNetB3 and EfficientNetB4 architectures
+- Two-stage transfer learning and fine-tuning
+- Confidence-aware predictions
+- Severity color coding
+- Interactive probability donut chart
+- Context-aware AI chatbot
+- Session-based patient history
+- Upload, webcam capture, or clipboard image input
+- Responsive Light/Dark mode interface
+- Educational and research-focused medical disclaimer
 
 ---
 
-# 🔄 Processing Pipeline
+# 🧠 Machine Learning Models
+
+| Model                  | Backbone       | Task                              | Input Size |
+| ---------------------- | -------------- | --------------------------------- | ---------- |
+| Brain Tumor Classifier | EfficientNetB0 | 4-Class MRI Classification        | 224×224    |
+| Pneumonia Classifier   | EfficientNetB3 | Binary Chest X-Ray Classification | 384×384    |
+| COVID-19 CT Classifier | EfficientNetB4 | Binary Chest CT Classification    | 380×380    |
+
+---
+
+# 📊 Model Performance
+
+| Model                            |   Accuracy |  ROC-AUC |      F1-Score |
+| -------------------------------- | ---------: | -------: | ------------: |
+| Brain Tumor (EfficientNetB0)     |  **95.6%** | **0.99** |      **0.95** |
+| COVID-19 CT (EfficientNetB4)     |  **91.3%** | **0.97** |      **0.91** |
+| Pneumonia X-Ray (EfficientNetB3) | **89–92%** | **0.95** | **0.89–0.93** |
+
+Special emphasis was placed on maximizing **Recall**, minimizing false negatives, and improving clinical screening reliability.
+
+---
+
+# 🔄 System Pipeline
 
 ```text
-User Upload
+Medical Image
       │
       ▼
 Image Preprocessing
       │
       ▼
-Model Inference
+Deep Learning Model
       │
       ▼
-Confidence Calibration
+Prediction & Confidence Score
       │
       ▼
-Diagnostic Results
+Severity Assessment
       │
-      ├── SVG Confidence Chart
-      └── Medical AI Assistant
+      ├── Probability Visualization
+      └── AI Medical Assistant
 ```
 
 ---
 
 # ⚙️ Data Preprocessing
 
-- RGB image conversion
+- RGB conversion
 - Image resizing
 - EfficientNet preprocessing
 - Pixel normalization
 - Confidence calibration
+- Probability normalization
 
-Input resolutions:
+Input sizes:
 
-- Brain MRI → 224 × 224
-- Chest X-Ray → 384 × 384
-- Chest CT → 380 × 380
+- Brain MRI → **224 × 224**
+- Chest X-Ray → **384 × 384**
+- Chest CT → **380 × 380**
 
 ---
 
-# 📦 Tech Stack
+# 📂 Datasets
 
-### AI & Deep Learning
+- **Brain Tumor MRI Dataset (Kaggle)** — 7,200 balanced MRI images across four classes.
+- **SARS-CoV-2 CT-Scan Dataset (Kaggle)** — 2,481 CT images for COVID-19 classification.
+- **Chest X-Ray Images (Pneumonia) Dataset (Paul Mooney - Kaggle)** — 6,464 chest X-ray images.
+
+---
+
+# 💻 Technologies Used
+
+### Programming
+
+- Python
+
+### Deep Learning
 
 - TensorFlow
 - Keras
 - EfficientNet
 - NumPy
+- Scikit-learn
+
+### Data Analysis
+
+- Pandas
+- Matplotlib
+- Seaborn
 
 ### User Interface
 
 - Gradio
 - HTML5
 - CSS3
-- SVG
+- SVG Visualization
 
 ### AI Assistant
 
 - Groq API
 - Llama 3.3 (70B)
 
-### Image Processing
+### Deployment
 
-- Pillow (PIL)
+- Hugging Face Spaces
 
 ---
 
 # 📂 Project Structure
 
 ```text
-AI-Radiology-Assistant/
+final_project/
 │
 ├── app.py
 ├── requirements.txt
@@ -180,29 +211,30 @@ python app.py
 
 # 🔑 Environment Variables
 
-Set your Groq API Key before running the application.
+Configure your Groq API key before running the application.
 
 ```bash
 export GROQ_API_KEY="YOUR_API_KEY"
 ```
 
-or create a `.env` file depending on your deployment platform.
+---
+
+# 🎯 Skills Demonstrated
+
+- Transfer Learning using EfficientNet architectures
+- Fine-tuning strategies for medical image classification
+- Handling class imbalance with computed class weights
+- Model evaluation using Accuracy, Precision, Recall, F1-Score and ROC-AUC
+- Error analysis and iterative model improvement
+- Deep Learning deployment with Hugging Face Spaces
+- Full-stack AI application development using Gradio
+- LLM integration with Groq API
+- Production debugging and confidence calibration
+- Medical Computer Vision and AI-assisted diagnosis
 
 ---
 
-# 📈 Model Outputs
-
-Each prediction includes:
-
-- Predicted Disease
-- Confidence Score
-- Diagnostic Severity
-- AI-generated Medical Explanation
-- Interactive Confidence Visualization
-
----
-
-## 👥 Contributors
+# 👥 Contributors
 
 - **Mariam Ayman**
 - **Philopateer Sharl**
@@ -212,6 +244,8 @@ Each prediction includes:
 
 ---
 
-## 📄 License
+# 📄 License
 
-This project is intended for educational and research purposes only and is **not** a substitute for professional medical diagnosis.
+This project was developed for **educational and research purposes only**.
+
+It is **not intended to replace professional medical diagnosis or clinical decision-making**.
